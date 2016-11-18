@@ -1,249 +1,38 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> -->
-    <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script> -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
     <meta charset="utf-8">
-    <title>Pizza Game</title>
+    <title>Welcome To Pizza Party</title>
   </head>
-  <body>
-    <center>
-      <h2>Build Your Own Pizza!</h2>
+  <body style="border: 1px solid slategray; width: 500px; padding-top: 30px;">    <center>
+
+      <h3>Register</h3>
+
+      <form action='/register' method='POST'>
+        <label for="username">Username:<input type="text" name="username" id="username"></label>
+        <label for="password">Password:<input type="password" name="password" id="password"></label>
+        <label for="confirm_password">Confirm Password:<input type="password" name="confirm_password" id="confirm_password"></label>
+        <input class="button-primary" type="submit" value="Register">
+      </form>
 
       <hr>
-      <div id="currentToppings">
-        <h5>Your Toppings:</h5>
-        <p>{{ session['currentOrder'] }}</p>
-      </div>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
       <hr>
 
-      <h4>Sauce</h4>
-      <table class="centered">
-        <tr>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Red Sauce">
-              <img src="{{ url_for('static', filename='img/other/jelly.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Red Sauce">
-            </form>
-          </td>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="White Sauce">
-              <img src="{{ url_for('static', filename='img/other/mustard.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="White Sauce">
-            </form>
-          </td>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Pesto">
-              <img src="{{ url_for('static', filename='img/other/mustard.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Pesto">
-            </form>
-          </td>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Olive Oil">
-              <img src="{{ url_for('static', filename='img/other/oil.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Olive Oil">
-            </form>
-          </td>
-        </tr>
-      </table>
+      <h3>Login</h3>
 
-      <h4>Veggies</h4>
-      <table class="centered">
-        <tr>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Asparagus">
-              <img src="{{ url_for('static', filename='img/veggies/asparagus.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Asparagus">
-            </form>
-          </td>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Bell Pepper">
-              <img src="{{ url_for('static', filename='img/veggies/pepper.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Bell Pepper">
-            </form>
-          </td>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Broccoli">
-              <img src="{{ url_for('static', filename='img/veggies/broccoli.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Broccoli">
-            </form>
-          </td>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Cauliflower">
-              <img src="{{ url_for('static', filename='img/veggies/cauliflower.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Cauliflower">
-            </form>
-          </td>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Chili Pepper">
-              <img src="{{ url_for('static', filename='img/veggies/chili.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Chili Pepper">
-            </form>
-          </td>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Eggplant">
-              <img src="{{ url_for('static', filename='img/veggies/aubergine.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Eggplant">
-            </form>
-          </td>
-        </tr>
-      </table>
-      <table class="centered">
-        <tr>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Garlic">
-              <img src="{{ url_for('static', filename='img/veggies/garlic.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Garlic">
-            </form>
-          </td>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Mushrooms">
-              <img src="{{ url_for('static', filename='img/veggies/mushrooms.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Mushrooms">
-            </form>
-          </td>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Olives">
-              <img src="{{ url_for('static', filename='img/veggies/olives.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Olives">
-            </form>
-          </td>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Red Onion">
-              <img src="{{ url_for('static', filename='img/veggies/onion.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Red Onion">
-            </form>
-          </td>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Pineapple">
-              <img src="{{ url_for('static', filename='img/veggies/pineapple.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Pineapple">
-            </form>
-          </td>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Tomato">
-              <img src="{{ url_for('static', filename='img/veggies/tomato.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Tomato">
-            </form>
-          </td>
-        </tr>
-      </table>
-
-      <h4>Meat & Cheese</h4>
-      <table class="centered">
-        <tr>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Anchovy">
-              <img src="{{ url_for('static', filename='img/other/fish.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Anchovy">
-            </form>
-          </td>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Ham">
-              <img src="{{ url_for('static', filename='img/other/ham.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Ham">
-            </form>
-          </td>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Pepperoni">
-              <img src="{{ url_for('static', filename='img/other/salami.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Pepperoni">
-            </form>
-          </td>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Sausage">
-              <img src="{{ url_for('static', filename='img/other/sausage.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Sausage">
-            </form>
-          </td>
-          <td>
-            <form action="/add" method="post">
-              <input type="hidden" name="topping" value="Cheese">
-              <img src="{{ url_for('static', filename='img/other/cheese.png') }}" style="width: auto; height: auto;max-width:
-               100px;max-height: 100px">
-              <br>
-              <input type="submit" value="Cheese">
-            </form>
-          </td>
-        </tr>
-      </table>
-
-      <div id="done">
-        <form action="/done">
-          {% with messages = get_flashed_messages() %}
-            {% if messages %}
-              {% for message in messages %}
-                <h5 span style="color: red;">{{ message }}<h5>
-              {% endfor %}
-            {% endif %}
-          {% endwith %}
-          <img src="{{ url_for('static', filename='img/pizza/pizza (5).png') }}" style="width: auto; height: auto;max-width:
-           100px;max-height: 100px">
-           <br>
-          <input type="submit" value="Gimme My Pizza!">
-        </form>
-      </div>
+      <form action='/login' method='POST'>
+        <label for="username">Username:<input type="text" name="username" id="username"></label>
+        <label for="password">Password:<input type="password" name="password" id="password"></label>
+        <input class="button-primary" type="submit" value="Login">
+      </form>
 
     </center>
   </body>

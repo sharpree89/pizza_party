@@ -9,12 +9,19 @@
     <center>
       <h1>Thanks For Ordering!</h1>
       <h3>Here's your pizza with:</h3>
-      <h4>{{ session['currentOrder'] }}</h4>
-      <img src="{{ url_for('static', filename='img/pizza/pizza.png') }}">
+      <div id="currentToppings">
+        {% for topping in session["toppings"]: %}
+          <p>{{ topping }}</p>
+        {% endfor %}
+      </div>      <img src="{{ url_for('static', filename='img/pizza/pizza.png') }}">
       <br>
       <form action="/reset">
         <br>
-        <input type="submit" value="I'm still hungry!">
+        <input class="button-primary" type="submit" value="I'm still hungry!">
+      </form>
+      <form action="/logout">
+        <br>
+        <input type="submit" value="Log Out">
       </form>
   </body>
 </html>
