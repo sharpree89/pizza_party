@@ -13,7 +13,8 @@
         {% for topping in session["toppings"]: %}
           <p>{{ topping }}</p>
         {% endfor %}
-      </div>      <img src="{{ url_for('static', filename='img/pizza/pizza.png') }}">
+      </div>
+      <img src="{{ url_for('static', filename='img/pizza/pizza.png') }}">
       <br>
       <form action="/reset">
         <br>
