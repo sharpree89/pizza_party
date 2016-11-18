@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <meta charset="utf-8">
+    <title>Pizza Game</title>
+  </head>
+  <body>
+    <center>
+      <h1>Thanks For Ordering!</h1>
+      <h3>Here's your pizza with:</h3>
+      <h4>{{ session['currentOrder'] }}</h4>
+      <img src="{{ url_for('static', filename='img/pizza/pizza.png') }}">
+      <br>
+      <form action="/reset">
+        <br>
+        <input type="submit" value="I'm still hungry!">
+      </form>
+  </body>
+</html>
