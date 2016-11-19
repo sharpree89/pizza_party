@@ -57,15 +57,12 @@ def login():
 
 @app.route('/pizza')
 def pizza():
-
     toppings = []
     session["toppings"] = toppings
-
     return render_template('index.html')
 
 @app.route('/add', methods=['POST'])
 def addToppings():
-
     if request.method == "POST":
         session["toppings"].append(request.form['topping'])
     return render_template('index.html')
