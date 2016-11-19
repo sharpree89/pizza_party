@@ -1,322 +1,283 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Build a Pizza</title>
+    <meta name="author" content="Cassidy" />
+    <meta name="description" content="Build a pizza!" />
+    <meta name="keywords" content="fullpage,jquery,pizza,app" />
+    <meta name="Resource-type" content="Document" />
 
-    <!-- Style -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css" href="/static/jquery.fullPage.css" />
+    <link rel="stylesheet" type="text/css" href="/static/examples.css" />
 
-    <!--Import Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .row {
+            widows: 100%;
+            text-align: center;
+        }
 
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="utf-8">
+        .block {
+            width: 130px;
+            display: inline-block;
+            margin: 25px 20px;
+        }
 
-    <title>Pizza Game</title>
+        input {
+            margin: 100px;
+            background-color: #EE6E73;
+            color: white;
+            margin: 20px;
+            padding: 10px 20px;
+            border: none !important;
+            border-radius: 10px;
+        }
+
+        img {
+            height: 120px;
+        }
+        .large_img{
+          height: 500px;
+        }
+        .medium_img{
+          height: 350px;
+        }
+    </style>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
+    <script type="text/javascript" src="/static/jquery.fullPage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#fullpage').fullpage({
+                sectionsColor: ['#ff9161', '#4BBFC3', '#7BAABE', 'whitesmoke', '#ccddff'],
+                anchors: ['start-info', 'sauce-info', 'veggies-info', 'meat-info', 'order-info', 'finished'],
+                menu: '#menu',
+                scrollingSpeed: 1000
+            });
+        });
+    </script>
 </head>
 
 <body>
-    <!-- Nav bar  -->
-    <nav class="red lighten-3" role="navigation">
-        <div class="nav-wrapper container">
-            <a id="logo-container" href="#" class="brand-logo"><img src="{{ url_for('static', filename='img/rest/web/1.png') }}" style="width: auto; height: auto;max-width:
-         55px;max-height: 55px"></a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="#"><span class="white-text text-lighten-2">Home<span></a></li>
-            </ul>
 
-            <ul id="nav-mobile" class="side-nav">
-                <li><a href="#">Navbar Link</a></li>
-            </ul>
-            <!-- maybe add this later -->
-            <!-- <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a> -->
+    <ul id="menu">
+        <li data-menuanchor="start-info"><a href="#start-info">Top</a></li>
+        <li data-menuanchor="sauce-info"><a href="#sauce-info">Sauce</a></li>
+        <li data-menuanchor="veggies-info"><a href="#veggies-info">Veggies</a></li>
+        <li data-menuanchor="meat-info"><a href="#meat-info">Meat</a></li>
+        <li data-menuanchor="order-info"><a href="#order-info">Order</a></li>
+    </ul>
+
+    <!-- section 0 -->
+    <div id="fullpage">
+        <div class="section active" id="section0">
+            <h1 style="color:whitesmoke">Build a Pizza</h1>
+            <input type="hidden" name="id" value="1" />
+            <p>Choose from the images below!</p>
+            <img src="/static/img/pizza/pizza3.png" class="large_img" alt="fullPage" />
         </div>
-    </nav>
-    <!-- top banner -->
-    <div id="index-banner" class="parallax-container">
-        <div class="section no-pad-bot">
-            <div class="container">
-                <br><br>
-                <h1 class="header center white-text text-lighten-3">Create Your Pizza</h1>
-                <div class="row center">
-                    <h5 class="header col s12 light">Choose From the images below!</h5>
-                </div>
-                <div class="row center">
-                    <a href="#" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
-                </div>
-            </div>
-        </div>
-        <div class="parallax"><img src="{{ url_for('static', filename='img/pizza/pizzabg2.jpg') }}" style="width: auto; height: auto;max-width:
-       1440px;max-height: 740px" alt="Pizza background img 1"></div>
-    </div>
-    <!-- Icons -->
-    <div class="container">
-        <div class="section">
-            <div class="row">
-                <div class="col s12 m4">
-                    <div class="icon-block">
+
+        <!-- section 1, Sauce -->
+        <div class="section" id="section1">
+            <div class="intro">
+                <h1>Choose a Sauce</h1>
+                <div class="row">
+                    <div class="block">
                         <form action="/add" method="post" class="center">
                             <input type="hidden" name="topping" value="Red Sauce" class="center">
-                            <img src="{{ url_for('static', filename='img/other/jelly.png') }}" style="width: auto; height: auto;max-width:150px;max-height: 150px">
-                            <input type="submit" class="waves-effect waves-light btn-large" value="Red Sauce">
+                            <img src="/static/img/other/jelly.png" height="100px" alt="slider" />
+                            <input type="submit" value="Red">
                         </form>
                     </div>
-                </div>
-
-                <div class="col s12 m4">
-                    <div class="icon-block">
+                    <div class="block">
                         <form action="/add" method="post" class="center">
-                            <input type="hidden" name="topping" value="White Sauce">
-                            <img src="{{ url_for('static', filename='img/other/mustard.png') }}" style="width: auto; height: auto;max-width: 150px;max-height: 150px">
-                            <input type="submit" class="waves-effect waves-light btn-large" value="White Sauce">
+                            <input type="hidden" name="topping" value="White Sauce" class="center">
+                            <img src="/static/img/other/mustard.png" height="100px" alt="slider" />
+                            <input type="submit" value="White">
                         </form>
                     </div>
-                </div>
-
-                <div class="col s12 m4">
-                    <div class="icon-block">
+                    <div class="block">
                         <form action="/add" method="post" class="center">
-                            <input type="hidden" name="topping" value="Pesto">
-                            <img src="{{ url_for('static', filename='img/other/mustard.png') }}" style="width: auto; height: auto;max-width: 150px;max-height: 150px">
-                            <input type="submit" class="waves-effect waves-light btn-large" value="Pesto">
-                        </form>
-                    </div>
-                </div>
-
-                <div class="col s12 m4">
-                    <div class="icon-block">
-                        <form action="/add" method="post" class="center">
-                            <input type="hidden" name="topping" value="Olive Oil">
-                            <img src="{{ url_for('static', filename='img/other/oil.png') }}" style="width: auto; height: auto; max-width: 150px;max-height: 150px">
-                            <input type="submit" class="waves-effect waves-light btn-large" value="Olive Oil">
+                            <input type="hidden" name="topping" value="Olive Oil" class="center">
+                            <img src="/static/img/other/oil.png" height="100px" alt="slider" />
+                            <input type="submit" value="Olive Oil">
                         </form>
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
 
-    <!-- end -->
-    <div class="parallax-container">
-        <div class="parallax"><img src="{{ url_for('static', filename='img/pizza/pizzabg1.jpg') }}" style="width: auto; height: auto;max-width:
-         1440px;max-height: 740px"></div>
-    </div>
-    <div class="section white">
-        <div class="row container">
-            <h2 class="header">Build Your Own Pizza!</h2>
-            <p class="grey-text text-darken-3 lighten-3">Select from the images to create the perfect pizza!</p>
+        <!-- Section 2, Veggies -->
+
+        <div class="section" id="section2">
+            <div class="intro">
+                <h1>Veggies</h1>
+                <div class="row">
+
+                    <div class="block">
+                        <form action="/add" method="post">
+                            <input type="hidden" name="topping" value="Garlic">
+                            <img src="{{ url_for('static', filename='img/veggies/garlic.png') }}">
+                            <input type="submit" value="Garlic">
+                        </form>
+                    </div>
+
+                    <div class="block">
+                        <form action="/add" method="post">
+                            <input type="hidden" name="topping" value="Mushrooms">
+                            <img src="{{ url_for('static', filename='img/veggies/mushrooms.png') }}" height="100px">
+                            <input type="submit" value="Mushrooms">
+                        </form>
+                    </div>
+
+                    <div class="block">
+                        <form action="/add" method="post">
+                            <input type="hidden" name="topping" value="Olives">
+                            <img src="{{ url_for('static', filename='img/veggies/olives.png') }}" height="100px">
+                            <input type="submit" value="Olives">
+                        </form>
+                    </div>
+
+                    <div class="block">
+                        <form action="/add" method="post">
+                            <input type="hidden" name="topping" value="Red Onion">
+                            <img src="{{ url_for('static', filename='img/veggies/onion.png') }}" height="100px">
+                            <input type="submit" value="Red Onion">
+                        </form>
+                    </div>
+
+                    <div class="block">
+                        <form action="/add" method="post">
+                            <input type="hidden" name="topping" value="Pineapple">
+                            <img src="{{ url_for('static', filename='img/veggies/pineapple.png') }}" height="100px">
+                            <input type="submit" value="Pineapple">
+                        </form>
+                    </div>
+
+                    <div class="block">
+                        <form action="/add" method="post">
+                            <input type="hidden" name="topping" value="Tomato">
+                            <img src="{{ url_for('static', filename='img/veggies/tomato.png') }}" height="100px">
+                            <input type="submit" value="Tomato">
+                        </form>
+                    </div>
+                    <div class="block">
+                        <form action="/add" method="post">
+                            <input type="hidden" name="topping" value="Asparagus">
+                            <img src="{{ url_for('static', filename='img/veggies/asparagus.png') }}">
+                            <input type="submit" value="Asparagus">
+                        </form>
+                    </div>
+                    <div class="block">
+                        <form action="/add" method="post">
+                            <input type="hidden" name="topping" value="Bell Pepper">
+                            <img src="{{ url_for('static', filename='img/veggies/pepper.png') }}">
+                            <input type="submit" value="Bell Pepper">
+                        </form>
+                    </div>
+                    <div class="block">
+                        <form action="/add" method="post">
+                            <input type="hidden" name="topping" value="Broccoli">
+                            <img src="{{ url_for('static', filename='img/veggies/broccoli.png') }}">
+                            <input type="submit" value="Broccoli">
+                        </form>
+                    </div>
+                    <div class="block">
+                        <form action="/add" method="post">
+                            <input type="hidden" name="topping" value="Cauliflower">
+                            <img src="{{ url_for('static', filename='img/veggies/cauliflower.png') }}">
+                            <input type="submit" value="Cauliflower">
+                        </form>
+                    </div>
+                    <div class="block">
+                        <form action="/add" method="post">
+                            <input type="hidden" name="topping" value="Chili Pepper">
+                            <img src="{{ url_for('static', filename='img/veggies/chili.png') }}">
+                            <input type="submit" value="Chili Pepper">
+                        </form>
+                    </div>
+                    <div class="block">
+                        <form action="/add" method="post">
+                            <input type="hidden" name="topping" value="Eggplant">
+                            <img src="{{ url_for('static', filename='img/veggies/aubergine.png') }}">
+                            <input type="submit" value="Eggplant">
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="parallax-container">
-        <div class="parallax"><img src="{{ url_for('static', filename='img/pizza/pizzabg2.jpg') }}" style="width: auto; height: auto;max-width:
-         600px;max-height: 600px"></div>
-    </div>
 
-    <div id="currentToppings">
-        <h5>Your Toppings:</h5>
-        <p>{{ session['currentOrder'] }}</p>
-    </div>
+        <!-- Section 3, Meats -->
+        <div class="section" id="section3">
+            <div class="intro">
+                <h1>Meats & Cheese</h1>
+                <div class="row">
+                    <div class="block">
+                        <form action="/add" method="post">
+                            <input type="hidden" name="topping" value="Anchovy">
+                            <img src="{{ url_for('static', filename='img/other/fish.png') }}">
+                            <input type="submit" value="Anchovy">
+                        </form>
+                    </div>
 
-    <h4>Veggies</h4>
-    <table class="centered">
-        <tr>
-            <td>
-                <form action="/add" method="post">
-                    <input type="hidden" name="topping" value="Asparagus">
-                    <img src="{{ url_for('static', filename='img/veggies/asparagus.png') }}" style="width: auto; height: auto;max-width:
-               150px;max-height: 150px">
-                    <br>
-                    <input type="submit" value="Asparagus">
-                </form>
-            </td>
-            <td>
-                <form action="/add" method="post">
-                    <input type="hidden" name="topping" value="Bell Pepper">
-                    <img src="{{ url_for('static', filename='img/veggies/pepper.png') }}" style="width: auto; height: auto;max-width:
-               150px;max-height: 150px">
-                    <br>
-                    <input type="submit" value="Bell Pepper">
-                </form>
-            </td>
-            <td>
-                <form action="/add" method="post">
-                    <input type="hidden" name="topping" value="Broccoli">
-                    <img src="{{ url_for('static', filename='img/veggies/broccoli.png') }}" style="width: auto; height: auto;max-width:
-               150px;max-height: 150px">
-                    <br>
-                    <input type="submit" value="Broccoli">
-                </form>
-            </td>
-            <td>
-                <form action="/add" method="post">
-                    <input type="hidden" name="topping" value="Cauliflower">
-                    <img src="{{ url_for('static', filename='img/veggies/cauliflower.png') }}" style="width: auto; height: auto;max-width:
-               150px;max-height: 150px">
-                    <br>
-                    <input type="submit" value="Cauliflower">
-                </form>
-            </td>
-            <td>
-                <form action="/add" method="post">
-                    <input type="hidden" name="topping" value="Chili Pepper">
-                    <img src="{{ url_for('static', filename='img/veggies/chili.png') }}" style="width: auto; height: auto;max-width:
-               150px;max-height: 150px">
-                    <br>
-                    <input type="submit" value="Chili Pepper">
-                </form>
-            </td>
-            <td>
-                <form action="/add" method="post">
-                    <input type="hidden" name="topping" value="Eggplant">
-                    <img src="{{ url_for('static', filename='img/veggies/aubergine.png') }}" style="width: auto; height: auto;max-width:
-               150px;max-height: 150px">
-                    <br>
-                    <input type="submit" value="Eggplant">
-                </form>
-            </td>
-        </tr>
-    </table>
-    <table class="centered">
-        <tr>
-            <td>
-                <form action="/add" method="post">
-                    <input type="hidden" name="topping" value="Garlic">
-                    <img src="{{ url_for('static', filename='img/veggies/garlic.png') }}" style="width: auto; height: auto;max-width:
-               150px;max-height: 150px">
-                    <br>
-                    <input type="submit" value="Garlic">
-                </form>
-            </td>
-            <td>
-                <form action="/add" method="post">
-                    <input type="hidden" name="topping" value="Mushrooms">
-                    <img src="{{ url_for('static', filename='img/veggies/mushrooms.png') }}" style="width: auto; height: auto;max-width:
-               150px;max-height: 150px">
-                    <br>
-                    <input type="submit" value="Mushrooms">
-                </form>
-            </td>
-            <td>
-                <form action="/add" method="post">
-                    <input type="hidden" name="topping" value="Olives">
-                    <img src="{{ url_for('static', filename='img/veggies/olives.png') }}" style="width: auto; height: auto;max-width:
-               150px;max-height: 150px">
-                    <br>
-                    <input type="submit" value="Olives">
-                </form>
-            </td>
-            <td>
-                <form action="/add" method="post">
-                    <input type="hidden" name="topping" value="Red Onion">
-                    <img src="{{ url_for('static', filename='img/veggies/onion.png') }}" style="width: auto; height: auto;max-width:
-               150px;max-height: 150px">
-                    <br>
-                    <input type="submit" value="Red Onion">
-                </form>
-            </td>
-            <td>
-                <form action="/add" method="post">
-                    <input type="hidden" name="topping" value="Pineapple">
-                    <img src="{{ url_for('static', filename='img/veggies/pineapple.png') }}" style="width: auto; height: auto;max-width:
-               150px;max-height: 150px">
-                    <br>
-                    <input type="submit" value="Pineapple">
-                </form>
-            </td>
-            <td>
-                <form action="/add" method="post">
-                    <input type="hidden" name="topping" value="Tomato">
-                    <img src="{{ url_for('static', filename='img/veggies/tomato.png') }}" style="width: auto; height: auto;max-width:
-               150px;max-height: 150px">
-                    <br>
-                    <input type="submit" value="Tomato">
-                </form>
-            </td>
-        </tr>
-    </table>
+                    <div class="block">
+                        <form action="/add" method="post">
+                            <input type="hidden" name="topping" value="Ham">
+                            <img src="{{ url_for('static', filename='img/other/ham.png') }}">
+                            <input type="submit" value="Ham">
+                        </form>
+                    </div>
 
-    <h4>Meat & Cheese</h4>
-    <table class="centered">
-        <tr>
-            <td>
-                <form action="/add" method="post">
-                    <input type="hidden" name="topping" value="Anchovy">
-                    <img src="{{ url_for('static', filename='img/other/fish.png') }}" style="width: auto; height: auto;max-width:
-               150px;max-height: 150px">
-                    <br>
-                    <input type="submit" value="Anchovy">
-                </form>
-            </td>
-            <td>
-                <form action="/add" method="post">
-                    <input type="hidden" name="topping" value="Ham">
-                    <img src="{{ url_for('static', filename='img/other/ham.png') }}" style="width: auto; height: auto;max-width:
-               150px;max-height: 150px">
-                    <br>
-                    <input type="submit" value="Ham">
-                </form>
-            </td>
-            <td>
-                <form action="/add" method="post">
-                    <input type="hidden" name="topping" value="Pepperoni">
-                    <img src="{{ url_for('static', filename='img/other/salami.png') }}" style="width: auto; height: auto;max-width:
-               150px;max-height: 150px">
-                    <br>
-                    <input type="submit" value="Pepperoni">
-                </form>
-            </td>
-            <td>
-                <form action="/add" method="post">
-                    <input type="hidden" name="topping" value="Sausage">
-                    <img src="{{ url_for('static', filename='img/other/sausage.png') }}" style="width: auto; height: auto;max-width:
-               150px;max-height: 150px">
-                    <br>
-                    <input type="submit" value="Sausage">
-                </form>
-            </td>
-            <td>
-                <form action="/add" method="post">
-                    <input type="hidden" name="topping" value="Cheese">
-                    <img src="{{ url_for('static', filename='img/other/cheese.png') }}" style="width: auto; height: auto;max-width:
-               150px;max-height: 150px">
-                    <br>
-                    <input type="submit" value="Cheese">
-                </form>
-            </td>
-        </tr>
-    </table>
+                    <div class="block">
+                        <form action="/add" method="post">
+                            <input type="hidden" name="topping" value="Pepperoni">
+                            <img src="{{url_for('static', filename='img/other/salami.png')}}">
+                            <input type="submit" value="Pepperoni">
+                        </form>
+                    </div>
 
-    <div id="done">
-        <form action="/done">
-            {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
-            <h5 span style="color: red;">{{ message }}<h5>
-              {% endfor %}
-            {% endif %}
-          {% endwith %}
-          <img src="{{ url_for('static', filename='img/pizza/pizza (5).png') }}" style="width: auto; height: auto;max-width:
-           150px;max-height: 150px">
-           <br>
-          <input type="submit" value="Gimme My Pizza!">
-        </form>
-      </div>
+                    <div class="block">
+                        <form action="/add" method="post">
+                            <input type="hidden" name="topping" value="Sausage">
+                            <img src="{{url_for('static', filename='img/other/sausage.png')}}">
+                            <input type="submit" value="Sausage">
+                        </form>
+                    </div>
 
-    </center>
-    <!-- JS -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+                    <div class="block">
+                        <form action="/add" method="post">
+                            <input type="hidden" name="topping" value="Cheese">
+                            <img src="{{url_for('static', filename='img/other/cheese.png')}}">
+                            <input type="submit" value="Cheese">
+                        </form>
+                    </div>
 
-    <footer class="page-footer red lighten-3">
-      <div class="footer-copyright">
-        <div class="container">
-        Made with <a class="grey-text text-lighten-3" href="http://materializecss.com">Python & Pizza</a>
+                </div>
+            </div>
         </div>
-      </div>
-    </footer>
-  </body>
+
+<!-- Section 4, Create -->
+        <div class="section" id="section4">
+            <div class="intro">
+                <h1>Create Your Pizza!</h1>
+                <div class="row">
+                    <form action="/done">
+                        {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+                        <h5 span style="color: red;">{{ message }}<h5>
+										{% endfor %}
+									{% endif %}
+								{% endwith %}
+							<img src="{{ url_for('static', filename='img/pizza/pizza (5).png') }}" class="medium_img">
+							<br>
+							<input type="submit" value="Gimme My Pizza!">
+						</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
 </html>

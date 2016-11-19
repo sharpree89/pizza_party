@@ -20,7 +20,6 @@ def addToppings():
         session["currentOrder"] += request.form['topping'] + " "
         print session["currentOrder"]
 
-
     return render_template('index.html')
 
 @app.route('/done')
