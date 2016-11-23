@@ -11,51 +11,51 @@ bcrypt = Bcrypt(app)
 #-------------------------------------------------------------------------------
 # REGISTRATION & LOGIN
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/register', methods=['POST'])
-def register():
-    # if form data passes validations:
-    if len(request.form['username']) > 5 and len(request.form['password']) > 7 and request.form['password'] == request.form['confirm_password']:
-        # hash the pw before storing it in the db.
-        pw_hash = bcrypt.generate_password_hash(request.form["password"])
-        query = "INSERT INTO users (username, pw_hash, created_at, updated_at) VALUES (:username, :pw_hash, NOW(), NOW())"
-        # We'll then create a dictionary of data from the POST data received.
-        data = {
-                 'username': request.form['username'],
-                 'pw_hash': pw_hash
-               }
-        # Run query, with dictionary values injected into the query.
-        mysql.query_db(query, data)
-        return redirect('/pizza')
-    else:
-        flash("There were errors registering the user.")
-        return redirect('/')
-
-@app.route('/login', methods=['POST'])
-def login():
-    # if form data passes validations:
-    if len(request.form['username']) > 5 and len(request.form['password']) > 7:
-        user_query = "SELECT * FROM users WHERE username = :username LIMIT 1"
-        query_data = { 'username': request.form['username'] }
-        user = mysql.query_db(user_query, query_data) # user will be returned in a list
-
-        if bcrypt.check_password_hash(user[0]['pw_hash'], request.form['password']):
-            session["user"] = user[0]
-            return redirect('/pizza')
-        else:
-            flash("Incorrect login info - try again!")
-            return redirect('/')
-    else:
-        flash("Incorrect login info - try again!")
-        return redirect('/')
+# @app.route('/')
+# def index():
+#     return render_template('index.html')
+#
+# @app.route('/register', methods=['POST'])
+# def register():
+#     # if form data passes validations:
+#     if len(request.form['username']) > 5 and len(request.form['password']) > 7 and request.form['password'] == request.form['confirm_password']:
+#         # hash the pw before storing it in the db.
+#         pw_hash = bcrypt.generate_password_hash(request.form["password"])
+#         query = "INSERT INTO users (username, pw_hash, created_at, updated_at) VALUES (:username, :pw_hash, NOW(), NOW())"
+#         # We'll then create a dictionary of data from the POST data received.
+#         data = {
+#                  'username': request.form['username'],
+#                  'pw_hash': pw_hash
+#                }
+#         # Run query, with dictionary values injected into the query.
+#         mysql.query_db(query, data)
+#         return redirect('/pizza')
+#     else:
+#         flash("There were errors registering the user.")
+#         return redirect('/')
+#
+# @app.route('/login', methods=['POST'])
+# def login():
+#     # if form data passes validations:
+#     if len(request.form['username']) > 5 and len(request.form['password']) > 7:
+#         user_query = "SELECT * FROM users WHERE username = :username LIMIT 1"
+#         query_data = { 'username': request.form['username'] }
+#         user = mysql.query_db(user_query, query_data) # user will be returned in a list
+#
+#         if bcrypt.check_password_hash(user[0]['pw_hash'], request.form['password']):
+#             session["user"] = user[0]
+#             return redirect('/pizza')
+#         else:
+#             flash("Incorrect login info - try again!")
+#             return redirect('/')
+#     else:
+#         flash("Incorrect login info - try again!")
+#         return redirect('/')
 
 #-------------------------------------------------------------------------------
 # CREATING AND STORING PIZZA
 
-@app.route('/pizza')
+@app.route('/')
 def pizza():
     toppings = []
     session["toppings"] = toppings
@@ -69,20 +69,19 @@ def addToppings():
 
 @app.route('/done')
 def createPizza():
-
     if len(session["toppings"]) == 0:
         flash("You haven't added any toppings yet!")
-        return redirect('/pizza')
+        return redirect('/')
     else:
         toppings_string = ', '.join(session["toppings"])
         query = "INSERT INTO pizzas (toppings, created_at, updated_at, user_id) VALUES (:toppings, NOW(), NOW(), :user_id)"
         # We'll then create a dictionary of data from the POST data received.
         data = {
                  'toppings': toppings_string,
-                 'user_id': session["user"]["id"]
+                #  'user_id': session["user"]["id"]
                }
         # Run query, with dictionary values injected into the query.
-        mysql.query_db(query, data)
+        # mysql.query_db(query, data)
 
         return render_template('done.html')
 
@@ -92,7 +91,7 @@ def createPizza():
 def reset():
 
     session["toppings"] = []
-    return redirect('/pizza')
+    return redirect('/')
 
 @app.route('/logout')
 def logout():
