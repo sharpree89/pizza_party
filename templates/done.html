@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Build a Pizza</title>
@@ -55,37 +53,7 @@
 			<input type="hidden" name="id" value="1" />
       <p>Here's your pizza with:</p>
       <p>{{ session['currentOrder'] }}</p>
-=======
-<html>
-  <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-    <meta charset="utf-8">
-    <title>Pizza Game</title>
-  </head>
-  <body>
-    <center>
-      <h1>Thanks For Ordering!</h1>
-      <h3>Here's your pizza with:</h3>
-      <div id="currentToppings">
-        {% for topping in session["toppings"]: %}
-          <p>{{ topping }}</p>
-        {% endfor %}
-      </div>
-      <img src="{{ url_for('static', filename='img/pizza/pizza.png') }}">
->>>>>>> 6b698ad75e0d9a98ba6725c8ad5f9f30fa7710b6
-      <br>
-      <img src="{{ url_for('static', filename='img/pizza/pizza.png') }}">
-      <form action="/reset">
-<<<<<<< HEAD
           <input type="submit" value="I'm still hungry!">
-=======
-        <br>
-        <input class="button-primary" type="submit" value="I'm still hungry!">
-      </form>
-      <form action="/logout">
-        <br>
-        <input type="submit" value="Log Out">
->>>>>>> 6b698ad75e0d9a98ba6725c8ad5f9f30fa7710b6
       </form>
 		</div>
 </body>
