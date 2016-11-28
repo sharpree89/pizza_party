@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Build a Pizza</title>
@@ -8,34 +7,25 @@
     <meta name="description" content="Build a pizza!" />
     <meta name="keywords" content="fullpage,jquery,pizza,app" />
     <meta name="Resource-type" content="Document" />
-
     <link rel="stylesheet" type="text/css" href="/static/jquery.fullPage.css" />
     <link rel="stylesheet" type="text/css" href="/static/examples.css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.css">
     <style>
+        .intro{
+          text-align: center;
+        }
         .row {
             widows: 100%;
-            text-align: center;
+            width: 1000px;
+            margin: auto;
         }
-
         .block {
-            width: 130px;
+            width: 200px;
             display: inline-block;
-            margin: 25px 20px;
+            margin: 20px 20px;
         }
-
-        input {
-            margin: 100px;
-            background-color: #EE6E73;
-            color: white;
-            margin: 20px;
-            padding: 10px 20px;
-            border: none !important;
-            border-radius: 10px;
-        }
-
         img {
-            height: 120px;
+            height: 200px;
         }
         .large_img{
           height: 500px;
@@ -43,68 +33,99 @@
         .medium_img{
           height: 350px;
         }
+        .button{
+          height: 100px;
+          width: auto;
+          color: white;
+          font-size: 32px;
+          background-color: #00cccc;
+          text-align: center;
+          cursor: pointer;
+          padding: 10px;
+        }
+        h1, p{
+          color: white;
+        }
+        #error{
+          margin: auto;
+          width: 500px;
+          margin-bottom: 10px;
+          text-align: center;
+        }
     </style>
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script> -->
     <script type="text/javascript" src="/static/jquery.fullPage.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#fullpage').fullpage({
-                sectionsColor: ['#ff9161', '#4BBFC3', '#7BAABE', 'whitesmoke', '#ccddff'],
-                anchors: ['start-info', 'sauce-info', 'veggies-info', 'meat-info', 'order-info', 'finished'],
+                sectionsColor: ['#50c878', 'orange', 'orange', 'orange', 'orange', '#9400D3'],
+                anchors: ['start-info', 'sauce-info', 'veggies-info', 'meat-info', 'extras-info', 'order-info'],
                 menu: '#menu',
                 scrollingSpeed: 1000
+            });
+            $('.button').hover(function(){
+              $(this).css("background-color", "#00b3b3");
+              }, function(){
+              $(this).css("background-color", "#00cccc");
             });
         });
     </script>
 </head>
-
 <body>
-
     <ul id="menu">
+        <li data-menuanchor="welcome"><a href="#">Welcome, {{ session["username"] }}</a></li>
         <li data-menuanchor="start-info"><a href="#start-info">Top</a></li>
         <li data-menuanchor="sauce-info"><a href="#sauce-info">Sauce</a></li>
         <li data-menuanchor="veggies-info"><a href="#veggies-info">Veggies</a></li>
-        <li data-menuanchor="meat-info"><a href="#meat-info">Meat</a></li>
+        <li data-menuanchor="meat-info"><a href="#meat-info">Meat/Cheese</a></li>
+        <li data-menuanchor="extras-info"><a href="#extras-info">Extras</a></li>
         <li data-menuanchor="order-info"><a href="#order-info">Order</a></li>
+        <li data-menuanchor="logout"><a href="/logout">Log Out</a></li>
     </ul>
 
     <!-- section 0 -->
     <div id="fullpage">
+      <form action="/add" method="post" class="center">
         <div class="section active" id="section0">
-            <h1 style="color:whitesmoke">Build a Pizza</h1>
+            <h1>Let's Get Started!</h1>
+            <div id="error">
+              {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                  {% for message in messages %}
+                  <br>
+                  <p>{{ message }}<p>
+                  <br>
+                  {% endfor %}
+                {% endif %}
+              {% endwith %}
+            </div>
             <input type="hidden" name="id" value="1" />
-            <p>Choose from the images below!</p>
-            <img src="/static/img/pizza/pizza3.png" class="large_img" alt="fullPage" />
+            <img src="/static/img/other/chef.png" class="large_img" alt="fullPage" />
         </div>
 
         <!-- section 1, Sauce -->
         <div class="section" id="section1">
             <div class="intro">
-                <h1>Choose a Sauce</h1>
                 <div class="row">
-                    <div class="block">
-                        <form action="/add" method="post" class="center">
-                            <input type="hidden" name="topping" value="Red Sauce" class="center">
-                            <img src="/static/img/other/jelly.png" height="100px" alt="slider" />
-                            <input type="submit" value="Red">
-                        </form>
+                      <h1>Step 1: Sauce</h1>
+                      <div class="block">
+                        <img src="/static/img/other/redsauce.png" alt="Red Sauce" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Red Sauce">
+                        <input type="checkbox" name="topping" id="redsauce" value="Red Sauce">
+                        <label for="redsauce"></label>
+                      </div>
+                      <div class="block">
+                        <img src="/static/img/other/whitesauce.png" alt="White Sauce" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="White Sauce">
+                        <input type="checkbox" name="topping" id="whitesauce" value="White Sauce">
+                        <label for="whitesauce"></label>
                     </div>
                     <div class="block">
-                        <form action="/add" method="post" class="center">
-                            <input type="hidden" name="topping" value="White Sauce" class="center">
-                            <img src="/static/img/other/mustard.png" height="100px" alt="slider" />
-                            <input type="submit" value="White">
-                        </form>
-                    </div>
-                    <div class="block">
-                        <form action="/add" method="post" class="center">
-                            <input type="hidden" name="topping" value="Olive Oil" class="center">
-                            <img src="/static/img/other/oil.png" height="100px" alt="slider" />
-                            <input type="submit" value="Olive Oil">
-                        </form>
+                        <img src="/static/img/other/pesto.png" alt="Pesto" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Pesto">
+                        <input type="checkbox" name="topping" id="pesto" value="Pesto">
+                        <label for="pesto"></label>
                     </div>
                 </div>
             </div>
@@ -114,97 +135,47 @@
 
         <div class="section" id="section2">
             <div class="intro">
-                <h1>Veggies</h1>
                 <div class="row">
-
+                    <h1>Step 2: Veggies</h1>
                     <div class="block">
-                        <form action="/add" method="post">
-                            <input type="hidden" name="topping" value="Garlic">
-                            <img src="{{ url_for('static', filename='img/veggies/garlic.png') }}">
-                            <input type="submit" value="Garlic">
-                        </form>
-                    </div>
-
-                    <div class="block">
-                        <form action="/add" method="post">
-                            <input type="hidden" name="topping" value="Mushrooms">
-                            <img src="{{ url_for('static', filename='img/veggies/mushrooms.png') }}" height="100px">
-                            <input type="submit" value="Mushrooms">
-                        </form>
-                    </div>
-
-                    <div class="block">
-                        <form action="/add" method="post">
-                            <input type="hidden" name="topping" value="Olives">
-                            <img src="{{ url_for('static', filename='img/veggies/olives.png') }}" height="100px">
-                            <input type="submit" value="Olives">
-                        </form>
-                    </div>
-
-                    <div class="block">
-                        <form action="/add" method="post">
-                            <input type="hidden" name="topping" value="Red Onion">
-                            <img src="{{ url_for('static', filename='img/veggies/onion.png') }}" height="100px">
-                            <input type="submit" value="Red Onion">
-                        </form>
-                    </div>
-
-                    <div class="block">
-                        <form action="/add" method="post">
-                            <input type="hidden" name="topping" value="Pineapple">
-                            <img src="{{ url_for('static', filename='img/veggies/pineapple.png') }}" height="100px">
-                            <input type="submit" value="Pineapple">
-                        </form>
-                    </div>
-
-                    <div class="block">
-                        <form action="/add" method="post">
-                            <input type="hidden" name="topping" value="Tomato">
-                            <img src="{{ url_for('static', filename='img/veggies/tomato.png') }}" height="100px">
-                            <input type="submit" value="Tomato">
-                        </form>
+                        <img src="{{ url_for('static', filename='img/veggies/mushrooms.png') }}" alt="Mushrooms" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Mushrooms">
+                        <input type="checkbox" name="topping" id="mushrooms" value="Mushrooms">
+                        <label for="mushrooms"></label>
                     </div>
                     <div class="block">
-                        <form action="/add" method="post">
-                            <input type="hidden" name="topping" value="Asparagus">
-                            <img src="{{ url_for('static', filename='img/veggies/asparagus.png') }}">
-                            <input type="submit" value="Asparagus">
-                        </form>
+                        <img src="{{ url_for('static', filename='img/veggies/olives.png') }}" alt="Olives" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Olives">
+                        <input type="checkbox" name="topping" id="olives" value="Olives">
+                        <label for="olives"></label>
                     </div>
                     <div class="block">
-                        <form action="/add" method="post">
-                            <input type="hidden" name="topping" value="Bell Pepper">
-                            <img src="{{ url_for('static', filename='img/veggies/pepper.png') }}">
-                            <input type="submit" value="Bell Pepper">
-                        </form>
+                        <img src="{{ url_for('static', filename='img/veggies/onion.png') }}" alt="Red Onion" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Red Onion">
+                        <input type="checkbox" name="topping" id="redonion" value="Red Onion">
+                        <label for="redonion"></label>
                     </div>
                     <div class="block">
-                        <form action="/add" method="post">
-                            <input type="hidden" name="topping" value="Broccoli">
-                            <img src="{{ url_for('static', filename='img/veggies/broccoli.png') }}">
-                            <input type="submit" value="Broccoli">
-                        </form>
+                        <img src="{{ url_for('static', filename='img/veggies/pineapple.png') }}" alt="Pineapple" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Pineapple">
+                        <input type="checkbox" name="topping" id="pineapple" value="Pineapple">
+                        <label for="pineapple"></label>
                     </div>
                     <div class="block">
-                        <form action="/add" method="post">
-                            <input type="hidden" name="topping" value="Cauliflower">
-                            <img src="{{ url_for('static', filename='img/veggies/cauliflower.png') }}">
-                            <input type="submit" value="Cauliflower">
-                        </form>
+                        <img src="{{ url_for('static', filename='img/veggies/tomato.png') }}" alt="Tomato" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Tomato">
+                        <input type="checkbox" name="topping" id="tomato" value="Tomato">
+                        <label for="tomato"></label>
                     </div>
                     <div class="block">
-                        <form action="/add" method="post">
-                            <input type="hidden" name="topping" value="Chili Pepper">
-                            <img src="{{ url_for('static', filename='img/veggies/chili.png') }}">
-                            <input type="submit" value="Chili Pepper">
-                        </form>
+                        <img src="{{ url_for('static', filename='img/veggies/pepper.png') }}" alt="Bell Pepper" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Bell Pepper">
+                        <input type="checkbox" name="topping" id="bellpepper" value="Bell Pepper">
+                        <label for="bellpepper"></label>
                     </div>
                     <div class="block">
-                        <form action="/add" method="post">
-                            <input type="hidden" name="topping" value="Eggplant">
-                            <img src="{{ url_for('static', filename='img/veggies/aubergine.png') }}">
-                            <input type="submit" value="Eggplant">
-                        </form>
+                        <img src="{{ url_for('static', filename='img/veggies/broccoli.png') }}" alt="Broccoli" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Broccoli">
+                        <input type="checkbox" name="topping" id="broccoli" value="Broccoli">
+                        <label for="broccoli"></label>
+                    </div>
+                    <div class="block">
+                        <img src="{{ url_for('static', filename='img/veggies/aubergine.png') }}" alt="Eggplant" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Eggplant">
+                        <input type="checkbox" name="topping" id="eggplant" value="Eggplant">
+                        <label for="eggplant"></label>
                     </div>
                 </div>
             </div>
@@ -213,70 +184,100 @@
         <!-- Section 3, Meats -->
         <div class="section" id="section3">
             <div class="intro">
-                <h1>Meats & Cheese</h1>
                 <div class="row">
+                    <h1>Step 3: Meat/Cheese</h1>
                     <div class="block">
-                        <form action="/add" method="post">
-                            <input type="hidden" name="topping" value="Anchovy">
-                            <img src="{{ url_for('static', filename='img/other/fish.png') }}">
-                            <input type="submit" value="Anchovy">
-                        </form>
+                        <img src="{{ url_for('static', filename='img/other/fish.png') }}" alt="Anchovies" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Anchovies">
+                        <input type="checkbox" name="topping" id="anchovies" value="Anchovies">
+                        <label for="anchovies"></label>
+                    </div>
+                    <div class="block">
+                        <img src="{{ url_for('static', filename='img/other/ham.png') }}" alt="Canadian Bacon" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Canadian Bacon">
+                        <input type="checkbox" name="topping" id="cbacon" value="Canadian Bacon">
+                        <label for="cbacon"></label>
                     </div>
 
                     <div class="block">
-                        <form action="/add" method="post">
-                            <input type="hidden" name="topping" value="Ham">
-                            <img src="{{ url_for('static', filename='img/other/ham.png') }}">
-                            <input type="submit" value="Ham">
-                        </form>
+                        <img src="{{url_for('static', filename='img/other/salami.png')}}" alt="Pepperoni" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Pepperoni">
+                        <input type="checkbox" name="topping" id="pepperoni" value="Pepperoni">
+                        <label for="pepperoni"></label>
                     </div>
-
                     <div class="block">
-                        <form action="/add" method="post">
-                            <input type="hidden" name="topping" value="Pepperoni">
-                            <img src="{{url_for('static', filename='img/other/salami.png')}}">
-                            <input type="submit" value="Pepperoni">
-                        </form>
+                        <img src="{{url_for('static', filename='img/other/sausage.png')}}" alt="Italian Sausage" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Italian Sausage">
+                        <input type="checkbox" name="topping" id="isausage" value="Italian Sausage">
+                        <label for="isausage"></label>
                     </div>
-
                     <div class="block">
-                        <form action="/add" method="post">
-                            <input type="hidden" name="topping" value="Sausage">
-                            <img src="{{url_for('static', filename='img/other/sausage.png')}}">
-                            <input type="submit" value="Sausage">
-                        </form>
+                        <img src="{{url_for('static', filename='img/other/cheese.png')}}" alt="Mozzerella Cheese" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Mozzerella Cheese">
+                        <input type="checkbox" name="topping" id="mcheese" value="Mozzerella Cheese">
+                        <label for="mcheese"></label>
                     </div>
-
                     <div class="block">
-                        <form action="/add" method="post">
-                            <input type="hidden" name="topping" value="Cheese">
-                            <img src="{{url_for('static', filename='img/other/cheese.png')}}">
-                            <input type="submit" value="Cheese">
-                        </form>
+                        <img src="{{url_for('static', filename='img/other/cheese2.png')}}" alt="Parmesan Cheese" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Parmesan Cheese">
+                        <input type="checkbox" name="topping" id="pcheese" value="Parmesan Cheese">
+                        <label for="pcheese"></label>
                     </div>
-
                 </div>
             </div>
         </div>
 
-<!-- Section 4, Create -->
+        <!-- Section 4, Extras -->
         <div class="section" id="section4">
             <div class="intro">
-                <h1>Create Your Pizza!</h1>
                 <div class="row">
-                    <form action="/done">
-                        {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
-                        <h5 span style="color: red;">{{ message }}<h5>
-										{% endfor %}
-									{% endif %}
-								{% endwith %}
-							<img src="{{ url_for('static', filename='img/pizza/pizza (5).png') }}" class="medium_img">
-							<br>
-							<input type="submit" value="Gimme My Pizza!">
-						</form>
-				</div>
-			</div>
-		</div>
+                  <h1>Step 4: Extras</h1>
+                  <div class="block">
+                      <img src="{{ url_for('static', filename='img/veggies/garlic.png') }}" alt="Minced Garlic" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Minced Garlic">
+                      <input type="checkbox" name="topping" id="garlic" value="Minced Garlic">
+                      <label for="garlic"></label>
+                  </div>
+                  <div class="block">
+                      <img src="{{ url_for('static', filename='img/veggies/chili.png') }}" alt="Red Chili Pepper" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Red Chili Pepper">
+                      <input type="checkbox" name="topping" id="chilipepper" value="Red Chili Pepper">
+                      <label for="chilipepper"></label>
+                  </div>
+                  <div class="block">
+                      <img src="{{url_for('static', filename='img/veggies/salad.png')}}" alt="Fresh Basil" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Fresh Basil">
+                      <input type="checkbox" name="topping" id="basil" value="Fresh Basil">
+                      <label for="basil"></label>
+                  </div>
+                  <div class="block">
+                      <img src="/static/img/other/oil.png" alt="Olive Oil" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Olive Oil">
+                      <input type="checkbox" name="topping" id="oliveoil" value="Olive Oil">
+                      <label for="oliveoil"></label>
+                  </div>
+                  <div class="block">
+                      <img src="/static/img/other/salt.png" alt="Salt" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Salt">
+                      <input type="checkbox" name="topping" id="salt" value="Salt">
+                      <label for="salt"></label>
+                  </div>
+                  <div class="block">
+                      <img src="/static/img/other/pepper.png" alt="Black Pepper" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Black Pepper">
+                      <input type="checkbox" name="topping" id="blackpepper" value="Black Pepper">
+                      <label for="blackpepper"></label>
+                  </div>
+                  <div class="block">
+                      <img src="/static/img/other/grater.png" alt="Freshly Grated Parmesan Cheese" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Grated Parmesan Cheese">
+                      <input type="checkbox" name="topping" id="gratedcheese" value="Grated Parmesan">
+                      <label for="gratedcheese"></label>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+<!-- Section 5, Create -->
+        <div class="section" id="section5">
+            <div class="intro">
+
+                <div class="row">
+                  <h1>All Done?</h1>
+    							<img src="{{ url_for('static', filename='img/pizza/pizza (5).png') }}" class="medium_img">
+    				    </div>
+    			  </div>
+            <br>
+            <input class="button" type="submit" value="Place Your Order">
+    		</div>
+    </form>
 	</div>
 </body>
 </html>

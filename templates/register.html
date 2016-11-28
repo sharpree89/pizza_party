@@ -9,7 +9,12 @@
     <link rel="stylesheet" type="text/css" href="/static/jquery.fullPage.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.css">
     <style>
-      #login{
+      @font-face{
+        font-family: "Altair-Bold Trial";
+        src: url('./static/fonts/Altair-Bold Trial.ttf');
+        font-weight: bold;
+      }
+      #register{
         background-color: #c5e1a5;
         width: 40%;
         margin-top: 250px;
@@ -42,6 +47,7 @@
       }
 
       .brand-logo{
+        font-family: "Altair-Bold Trial", sans-serif;
         height: 150px;
       }
       .nav{
@@ -84,20 +90,20 @@
           <div class="nav-wrapper light-green darken-2">
             <a href="#" class="brand-logo center"><h1><img src="static/img/pizza/pizza.png" alt="pizza logo">Pizza Party</h1></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-              <li class="links"><a href="/signup">Register</a></li>
-              <li class="active links"><a href="#">Login</a></li>
+              <li class="active links"><a href="#">Register</a></li>
+              <li class="links"><a href="/">Login</a></li>
             </ul>
           </div>
         </nav>
       </div>
 
       <center>
-        <div id="login">
-          <form action='/login' method='POST'>
-            <input class="input" type="text" name="username" id="username" placeholder="Username" autofocus>
-            <input class="input" type="password" name="password" id="password" placeholder="Password">
-            <input class="button" type="submit" value="Login">
-            <p class="link"><a class="link" href="/signup">Don't have an account? Sign up today!</a></p>
+        <div id="register">
+          <form action='/register' method='POST'>
+            <input class="input" type="text" name="username" id="username" placeholder="Username (must have at least 6 characters)" autofocus>
+            <input class ="input" type="password" name="password" id="password" placeholder="Password (must have at least 8 characters)">
+            <input class ="input" type="password" name="confirm_password" id="confirm_password" placeholder="Enter your password again">
+            <input class="button" type="submit" value="Register">
           </form>
         </div>
       </center>

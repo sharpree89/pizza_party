@@ -7,54 +7,87 @@
     <meta name="description" content="Build a pizza!" />
     <meta name="keywords" content="fullpage,jquery,pizza,app" />
     <meta name="Resource-type" content="Document" />
-
     <link rel="stylesheet" type="text/css" href="/static/jquery.fullPage.css" />
     <link rel="stylesheet" type="text/css" href="/static/examples.css" />
-
     <style>
         input{
       		margin: 100px;
-      		background-color: #EE6E73; color: white; margin: 20px; padding: 10px 20px; border: none !important; border-radius: 10px;
+      		background-color: #EE6E73;
+          color: white;
+          margin: 20px;
+          padding: 10px 20px;
+          border: none !important;
       	}
         .row {
             widows: 100%;
             text-align: center;
+            margin-top: 50px;
         }
-
-        .block {
-            width: 130px;
-            display: inline-block;
-            margin: 25px 20px;
+        .button{
+          height: 100px;
+          width: auto;
+          color: white;
+          font-size: 32px;
+          background-color: #F5A604;
+          text-align: center;
+          cursor: pointer;
         }
-
+        p{
+          color: white;
+          padding: 10px;
+        }
+        h7{
+          color: white;
+          font-size: 48px;
+        }
+        h8{
+          color: white;
+          font-size: 36px;
+        }
 
     </style>
-
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
-
     <script type="text/javascript" src="/static/jquery.fullPage.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#fullpage').fullpage({
-                sectionsColor: ['#7BAABE', '#4BBFC3', '#ff9161', 'whitesmoke', '#ccddff'],
-                anchors: ['start-info', 'sauce-info', 'veggies-info', 'meat-info', 'order-info', 'finished'],
+                sectionsColor: ['#50c878'],
+                anchors: ['finished'],
                 menu: '#menu',
                 scrollingSpeed: 1000
+            });
+            $('.button').hover(function(){
+              $(this).css("background-color", "#dd9706");
+              }, function(){
+              $(this).css("background-color", "#F5A604");
             });
         });
     </script>
 </head>
-
 <body>
+  <ul id="menu">
+      <li data-menuanchor="finished"><a href="#">Finished</a></li>
+      <li data-menuanchor="reset"><a href="/reset">I'm Still Hungry!</a></li>
+      <li data-menuanchor="logout"><a href="/logout">Log Out</a></li>
+  </ul>
+
   <div id="fullpage">
+<!-- Section 0, Finished -->
     <div class="section active" id="section0">
-			<h1 style="color:whitesmoke">Thanks For Ordering!</h1>
-			<input type="hidden" name="id" value="1" />
-      <p>Here's your pizza with:</p>
-      <p>{{ session['toppings'] }}</p>
-          <input type="submit" value="I'm still hungry!">
-      </form>
-		</div>
+        <div class="intro">
+            <div class="row">
+              <p>Order #{{ session['pizza_count'] }} is up!</p>
+              <h7>Thanks for ordering, {{ session['username'] }}!</h7>
+              <br>
+              <br>
+              <h8>You ordered:</h8>
+              <p>{{ session['display_toppings'] }}</p>
+  						<img src="{{ url_for('static', filename='img/pizza/pizza3.png') }}" class="medium_img">
+  			    </div>
+  		  </div>
+  	</div>
+
+  </div>
 </body>
 </html>
