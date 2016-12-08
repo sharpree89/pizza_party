@@ -8,60 +8,70 @@
     <meta name="Resource-type" content="Document" />
     <link rel="stylesheet" type="text/css" href="/static/jquery.fullPage.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <style>
-      @font-face{
-        font-family: "Altair-Bold Trial";
-        src: url('./static/fonts/Altair-Bold Trial.ttf');
-        font-weight: bold;
-      }
-      #register{
-        background-color: #c5e1a5;
-        width: 40%;
-        margin-top: 250px;
-      }
-      #errors{
-        padding-left: 2.5%;
-        padding-right: 2.5%;
-        width: 40%;
-        text-align: center;
-        color: grey;
-      }
-      .button{
-        width: 75% !important;
-        height: 8%;
-        color: white;
-        font-size: 26px;
-        background-color: #558b2f;
-      }
-      .input{
-        width: 74% !important;
-        background-color: white !important;
-        font-weight: bold;
-        font-size: 150%;
-        border: 3px solid white !important;
-      }
-      .link{
-        width: 60%;
-        color: #558b2f;
-        font-size: 24px;
-      }
+    body {
+      background-color: white;
+      font-family: 'Nunito', sans-serif;
+    }
+    #register{
+      width: 80%;
+      margin-top: 250px;
+      margin-left: auto;
+    }
+    #errors{
+      padding-left: 2.5%;
+      padding-right: 2.5%;
+      width: 40%;
+      text-align: center;
+      color: grey;
+    }
+    .button{
+      width: 74% !important;
+      color: white;
+      font-size: 26px;
+      background-color: #558b2f;
+      border-radius: 5px;
+    }
+    .input{
+      width: 74% !important;
+      background-color: white !important;
+      font-weight: bold;
+      font-size: 150%;
+      border: 1px solid lightgrey !important;
+      border-radius: 5px !important;
+    }
 
-      .brand-logo{
-        font-family: "Altair-Bold Trial", sans-serif;
-        height: 150px;
-      }
-      .nav{
-        height: 150px;
-      }
-      img{
-        width: 75px;
-        height: auto;
-        margin-right: 10px;
-      }
-      #container{
-        width: 800px;
-        height: auto;
-      }
+    .input:active {
+      border: 1px solid #558b2f !important;
+
+    }
+    .link{
+      width: 60%;
+      color: #558b2f;
+      font-size: 24px;
+    }
+
+    .brand-logo{
+      height: 150px;
+    }
+    .nav{
+      height: 150px;
+    }
+    img{
+      width: 75px;
+      height: auto;
+      margin-right: 10px;
+    }
+    #container{
+      width: 800px;
+      height: auto;
+    }
+
+    h1 {
+      font-weight: bold;
+    }
+
 
     </style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -82,7 +92,7 @@
         });
     </script>
 </head>
-  <body style="background-color: #c5e1a5;">
+  <body>
     <div id="fullpage">
 
       <div class="navbar-fixed">
@@ -97,16 +107,22 @@
         </nav>
       </div>
 
-      <center>
-        <div id="register">
-          <form action='/register' method='POST'>
-            <input class="input" type="text" name="username" id="username" placeholder="Username (must have at least 6 characters)" autofocus>
-            <input class ="input" type="password" name="password" id="password" placeholder="Password (must have at least 8 characters)">
-            <input class ="input" type="password" name="confirm_password" id="confirm_password" placeholder="Enter your password again">
-            <input class="button" type="submit" value="Register">
-          </form>
-        </div>
-      </center>
+      <div id="register">
+        <form action='/register' method='POST'>
+          <label for="username">Username (must have at least 6 characters)</label>
+          <br>
+          <input class="input" type="text" name="username" id="username">
+          <br>
+          <label for="password">Password (must have at least 8 characters)</label>
+          <br>
+          <input class ="input" type="password" name="password" id="password" >
+          <br>
+          <label for="Confirm Password">Enter your password again</label>
+          <br>
+          <input class ="input" type="password" name="confirm_password" id="confirm_password">
+          <input class="button" type="submit" value="Register">
+        </form>
+      </div>
 
     </div>
   </body>

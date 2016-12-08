@@ -8,11 +8,16 @@
     <meta name="Resource-type" content="Document" />
     <link rel="stylesheet" type="text/css" href="/static/jquery.fullPage.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <style>
+      body {
+        background-color: white;
+        font-family: 'Nunito', sans-serif;
+      }
       #login{
-        background-color: #c5e1a5;
-        width: 40%;
+        width: 80%;
         margin-top: 250px;
+        margin-left: auto;
       }
       #errors{
         padding-left: 2.5%;
@@ -22,19 +27,21 @@
         color: grey;
       }
       .button{
-        width: 75% !important;
-        height: 8%;
+        width: 74% !important;
         color: white;
         font-size: 26px;
         background-color: #558b2f;
+        border-radius: 5px;
       }
       .input{
         width: 74% !important;
         background-color: white !important;
         font-weight: bold;
         font-size: 150%;
-        border: 3px solid white !important;
+        border: 1px solid lightgrey !important;
+        border-radius: 5px !important;
       }
+
       .link{
         width: 60%;
         color: #558b2f;
@@ -57,6 +64,10 @@
         height: auto;
       }
 
+      h1 {
+        font-weight: bold;
+      }
+
     </style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
@@ -76,7 +87,7 @@
         });
     </script>
 </head>
-  <body style="background-color: #c5e1a5;">
+  <body>
     <div id="fullpage">
 
       <div class="navbar-fixed">
@@ -91,16 +102,19 @@
         </nav>
       </div>
 
-      <center>
-        <div id="login">
-          <form action='/login' method='POST'>
-            <input class="input" type="text" name="username" id="username" placeholder="Username" autofocus>
-            <input class="input" type="password" name="password" id="password" placeholder="Password">
-            <input class="button" type="submit" value="Login">
-            <p class="link"><a class="link" href="/signup">Don't have an account? Sign up today!</a></p>
-          </form>
-        </div>
-      </center>
+      <div id="login">
+        <form action='/login' method='POST'>
+          <label for="username">Username</label>
+          <br>
+          <input class="input" type="text" name="username" id="username" placeholder="Username">
+          <br>
+          <label for="password">Password</label>
+          <br>
+          <input class="input" type="password" name="password" id="password" placeholder="Password">
+          <input class="button" type="submit" value="Login">
+          <p class="link"><a class="link" href="/signup">Don't have an account? Sign up today!</a></p>
+        </form>
+      </div>
 
     </div>
   </body>
