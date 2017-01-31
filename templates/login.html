@@ -2,11 +2,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Build a Pizza</title>
-    <meta name="author" content="Cassidy" />
-    <meta name="description" content="Build a pizza!" />
-    <meta name="keywords" content="fullpage,jquery,pizza,app" />
-    <meta name="Resource-type" content="Document" />
-    <link rel="stylesheet" type="text/css" href="/static/jquery.fullPage.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <style>
@@ -14,71 +10,83 @@
         background-color: white;
         font-family: 'Nunito', sans-serif;
       }
-      #login{
-        width: 80%;
-        margin-top: 250px;
-        margin-left: auto;
+
+      nav {
+        background-color: #558b2f;
+
       }
-      #errors{
-        padding-left: 2.5%;
-        padding-right: 2.5%;
-        width: 40%;
-        text-align: center;
-        color: grey;
-      }
+
       .button{
-        width: 74% !important;
         color: white;
-        font-size: 26px;
+        font-size: 1.5em;
+        border: 1px solid #558b2f;
         background-color: #558b2f;
         border-radius: 5px;
+        padding: 4px 24px;
       }
+
+      .button:hover {
+        background-color: #9ccc65;
+        border: 1px solid #9ccc65;
+
+      }
+
+      .button:focus {
+        outline: none;
+      }
+
       .input{
-        width: 74% !important;
         background-color: white !important;
-        font-weight: bold;
-        font-size: 150%;
         border: 1px solid lightgrey !important;
         border-radius: 5px !important;
+        padding: 1% 2% !important;
       }
 
       .link{
-        width: 60%;
         color: #558b2f;
-        font-size: 24px;
+        font-size: 1.5em;
+        margin-bottom: 2.5%;
       }
 
-      .brand-logo{
-        height: 150px;
+      .brand-logo {
+        margin-left: 2.5%;
       }
-      .nav{
-        height: 150px;
-      }
+
       img{
         width: 75px;
         height: auto;
         margin-right: 10px;
       }
-      #container{
-        width: 800px;
-        height: auto;
+
+      #login {
+        width: 50%;
+        padding-top: 10%;
+      }
+
+      @media screen and (max-width: 480px) {
+        #login {
+            width: 85%;
+            padding-top: 30%;
+        }
+
+        .link {
+          font-size: 1.25em;
+        }
       }
 
       h1 {
         font-weight: bold;
       }
 
+      label {
+        font-size: 18px;
+      }
+
     </style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/static/jquery.fullPage.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('.button').hover(function(){
-              $(this).css("background-color", "#9ccc65");
-              }, function(){
-              $(this).css("background-color", "#558b2f");
-            });
             $('.link').hover(function(){
               $(this).css("color", "#9ccc65");
               }, function(){
@@ -88,22 +96,23 @@
     </script>
 </head>
   <body>
-    <div id="fullpage">
 
-      <div class="navbar-fixed">
-        <nav class="nav">
-          <div class="nav-wrapper light-green darken-2">
-            <a href="#" class="brand-logo center"><h1><img src="static/img/pizza/pizza.png" alt="pizza logo">Pizza Party</h1></a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-              <li class="links"><a href="/signup">Register</a></li>
-              <li class="active links"><a href="#">Login</a></li>
-            </ul>
-          </div>
-        </nav>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo">Pizza Party</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/">Login</a></li>
+          <li><a href="/signup">Sign Up</a></li>
+        </ul>
       </div>
+    </nav>
 
+    <center>
       <div id="login">
         <form action='/login' method='POST'>
+          <a class="link" href="/signup">Don't have an account? Sign up today!</a>
+          <br>
+          <br>
           <label for="username">Username</label>
           <br>
           <input class="input" type="text" name="username" id="username" placeholder="Username">
@@ -112,10 +121,10 @@
           <br>
           <input class="input" type="password" name="password" id="password" placeholder="Password">
           <input class="button" type="submit" value="Login">
-          <p class="link"><a class="link" href="/signup">Don't have an account? Sign up today!</a></p>
         </form>
       </div>
 
-    </div>
+    </center>
+
   </body>
 </html>
